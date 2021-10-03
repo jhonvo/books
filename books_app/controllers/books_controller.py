@@ -18,7 +18,7 @@ def book_create():
 @app.route('/book/<int:id>', methods=['GET','POST'])
 def book_detail(id):
     bookfav = Book.bookfavorites(id)
-    authorlist = authors.Author.allauthors()
+    authorlist = authors.Author.missingauthors(id)
     return render_template ('bookinfo.html', bookfav = bookfav, authors = authorlist)
 
 @app.route('/book/fav', methods=['POST'])

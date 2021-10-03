@@ -19,6 +19,18 @@ class Book:
         return books
 
     @classmethod
+    def missingbooks(cls,id):
+        query = "SELECT * FROM books WHERE books.id NOT IN (SELECT DISTINCT id FROM books LEFT JOIN favorites ON books.id = favorites.book_id WHERE favorites.author_id = %(id)s);"
+        data = {
+            'id' : id
+        }
+        results = connectToMySQL("mydb").query_db(query,data)
+        books = []
+        for line in results:
+            books.append(Book(line))
+        return books
+
+    @classmethod
     def newbook(cls, data):
         query = "INSERT INTO books (title,num_of_pages) VALUES (%(title)s,%(num_of_pages)s);"
         results = connectToMySQL("mydb").query_db(query,data)

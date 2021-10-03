@@ -25,6 +25,18 @@ class Author:
         return authors
 
     @classmethod
+    def missingauthors(cls,id):
+        query = "SELECT * FROM authors WHERE authors.id NOT IN (SELECT DISTINCT id FROM authors LEFT JOIN favorites ON authors.id = favorites.author_id WHERE favorites.book_id = %(id)s);"
+        data = {
+            'id' : id
+        }
+        results = connectToMySQL("mydb").query_db(query,data)
+        authors = []
+        for line in results:
+            authors.append(Author(line))
+        return authors
+
+    @classmethod
     def authorfavorites(cls,id):
         query = "SELECT * FROM authors LEFT JOIN favorites ON authors.id = favorites.author_id LEFT JOIN books ON books.id = favorites.book_id WHERE authors.id = %(id)s;"
         data = {
