@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-row bd-highlight mt-3 justify-content-center">
+    <div class="d-flex flex-column bd-highlight mb-3 col-3 m-5 border p-3 rounded">
+        <h1 class="display-6 mb-3">New Author</h1>
+        <form class="d-flex flex-column bd-highlight mb-3" action="/author/create" method="POST">
+            <label class="mb-2">Name:</label>
+            <input class="my-2"type="text" name="name">
+            <input type="hidden" name="id" value="">
+            <button class="my-2 btn btn-info bg-gradient" type="submit">Create</button>
+        </form>
+    </div>
+    <div class="d-flex flex-column bd-highlight mb-3 col-4 m-5 border rounded p-3">
+        <h1 class="display-6 mb-3">All Authors</h1>
+        <div class="d-flex flex-column bd-highlight mb-3 p-3 bg-info text-dark border rounded bg-gradient" style="--bs-bg-opacity: .25;" >
+            {% for author in authors:%}
+                <a href="/author/{{author.id}}" class="link-secondary">{{author.name}}</a>
+            {% endfor %}
+            <!-- <a href="/author/id" class="link-secondary">TEST</a> -->
+        </div>
+        <a href="/books" class="link-info">Add a book</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>

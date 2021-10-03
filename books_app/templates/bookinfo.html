@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-row bd-highlight mt-3 justify-content-center">
+    <div class="d-flex flex-column bd-highlight mb-3 col-4 m-5 border rounded p-3">
+        <h1 class="display-6 mb-3">{{bookfav.title}}'s Favorites</h1>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Favorited by:</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in bookfav.authors: %}
+                <tr>
+                    <td>
+                    {{author.name}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/authors" class="link-primary">Home</a>
+    </div>
+    <div class="d-flex flex-column bd-highlight mb-3 col-4 m-5 border p-3 rounded">
+        <h1 class="display-6 mb-3">Add to favorites</h1>
+        <form class="bd-highlight " action="/book/fav" method="POST">
+            <span class="d-flex flex-row mb-2">
+                <label for="dojo" class="col-3">Author:</label>
+                <select class="form-select form-select-sm" name="author_id">
+                    <option selected>Select an author...</option>
+                    {% for author in authors: %}
+                    <option value="{{author.id}}">{{author.name}}</option>
+                    {% endfor %}
+                </select>
+            </span>
+            <input type="hidden" name="book_id" value="{{bookfav.id}}">
+            <span class="d-flex flex-row mb-2 justify-content-around">
+                <button class="my-2 btn btn-primary bg-gradient" type="submit">Add</button>
+            </span>  
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<!-- <div class="d-flex flex-column bd-highlight mb-3 p-3 bg-primary bg-gradient text-dark border rounded" style="--bs-bg-opacity: .25;">
+{% for book in books:%}
+                <a href="/book/id" class="link-secondary">{{book.name}}</a>
+            {% endfor %}
+  
+</div> -->
+            
